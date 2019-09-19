@@ -93,11 +93,14 @@ class SectionTableView extends StatefulWidget {
   final RefreshController refreshController;
   ScrollController get scrollController => _scrollController;
 
+  final EdgeInsetsGeometry padding;
+
   SectionTableView({
     Key key,
     @required this.sectionCount,
     @required this.numOfRowInSection,
     @required this.cellAtIndexPath,
+    this.padding,
     this.headerInSection,
     this.divider,
     this.sectionHeaderHeight,
@@ -394,6 +397,7 @@ class _SectionTableViewState extends State<SectionTableView> {
           onOffsetChange: _onOffsetCallback,
           child: ListView.builder(
               key: listViewKey,
+              padding: widget.padding,
               itemBuilder: (context, index) {
                 return _buildCell(context, index);
               }));
@@ -401,6 +405,7 @@ class _SectionTableViewState extends State<SectionTableView> {
 //      print('didn\'t use pull refresh');
       return ListView.builder(
           key: listViewKey,
+          padding: widget.padding,
           physics: AlwaysScrollableScrollPhysics(),
           controller: widget.scrollController,
           itemBuilder: (context, index) {
